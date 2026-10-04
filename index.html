@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0F0E13">
+<meta name="color-scheme" content="dark">
+<title>WALKER</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F0E13;--card:#1A1822;--tx:#F4F1FA;--mu:#B9B3C9;--ac:#C9A7F5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Manrope',system-ui,sans-serif;min-height:100vh}
+main{max-width:480px;margin:0 auto;padding:22px 20px 40px;display:flex;flex-direction:column;gap:18px}
+header{display:flex;justify-content:space-between;align-items:center}
+h1{margin:0;font-size:16px;letter-spacing:6px;font-weight:800}
+.d{font-size:14px;color:var(--mu)}
+.ring{position:relative;width:240px;height:240px;margin:6px auto 0}
+.ring svg{transform:rotate(-90deg)}
+.mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.mid b{font-size:52px;letter-spacing:-1px}.mid span{font-size:13px;color:var(--mu)}
+.row{display:flex;gap:10px}
+.c{flex:1;background:var(--card);border-radius:18px;padding:14px}
+.c span{font-size:12px;color:var(--mu)}.c b{display:block;font-size:20px;margin-top:2px}
+button{height:60px;border:0;border-radius:30px;background:#fff;color:#0F0E13;font:800 17px 'Manrope',sans-serif;box-shadow:0 0 40px rgba(201,167,245,.35)}
+button.stop{background:#E8795A;color:#fff;box-shadow:none}
+.st{text-align:center;font-size:13px;color:var(--mu);min-height:18px}
+h2{margin:6px 0 0;font-size:14px;color:var(--mu);font-weight:600}
+.h{display:flex;justify-content:space-between;background:var(--card);border-radius:16px;padding:12px 16px;font-size:14px;margin-top:8px}
+.h span{color:var(--mu)}
+</style>
+</head>
+<body>
+<main>
+<header><h1>WALKER</h1><span class="d" id="date"></span></header>
+<div class="ring">
+<svg width="240" height="240" viewBox="0 0 240 240"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E7B8F0"/><stop offset="1" stop-color="#8E7BEF"/></linearGradient></defs>
+<circle cx="120" cy="120" r="102" fill="none" stroke="#2A2733" stroke-width="16"/>
+<circle id="arc" cx="120" cy="120" r="102" fill="none" stroke="url(#g)" stroke-width="16" stroke-linecap="round" stroke-dasharray="641" stroke-dashoffset="641"/></svg>
+<div class="mid"><b id="steps">0</b><span>sur 10 000 pas</span></div>
+</div>
+<div class="row"><div class="c"><span>Distance</span><b id="km">0,00 km</b></div><div class="c"><span>Énergie</span><b id="kcal">0 kcal</b></div><div class="c"><span>Durée</span><b id="time">0:00</b></div></div>
+<button id="go">Démarrer une marche</button>
+<div class="st" id="msg">Garde l'appli ouverte pendant la marche.</div>
+<h2>Historique</h2>
+<div id="hist"><div class="h"><span>Aucune marche pour le moment</span></div></div>
+</main>
+<script>
+(function(){
+var GOAL=10000, STRIDE=0.75, KC=0.045;
+var $=function(i){return document.getElementById(i)};
+var key=new Date().toISOString().slice(0,10);
+var data={days:{},sessions:[]};
+try{var s=localStorage.getItem('walker');if(s)data=JSON.parse(s)}catch(e){}
+if(!data.days)data.days={};if(!data.sessions)data.sessions=[];
+function save(){try{localStorage.setItem('walker',JSON.stringify(data))}catch(e){}}
+$('date').textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+var run=false,sessSteps=0,t0=0,tick=null,lock=null;
+function fmt(n){return n.toLocaleString('fr-FR')}
+function render(){
+ var st=data.days[key]||0;
+ $('steps').textContent=fmt(st);
+ $('arc').style.strokeDashoffset=641*(1-Math.min(st/GOAL,1));
+ $('km').textContent=(st*STRIDE/1000).toFixed(2).replace('.',',')+' km';
+ $('kcal').textContent=Math.round(st*KC)+' kcal';
+ var sec=run?Math.floor((Date.now()-t0)/1000):0;
+ $('time').textContent=Math.floor(sec/60)+':'+('0'+sec%60).slice(-2);
+}
+function hist(){
+ var h=$('hist');
+ if(!data.sessions.length)return;
+ h.innerHTML='';
+ data.sessions.slice(-5).reverse().forEach(function(x){
+  var d=document.createElement('div');d.className='h';
+  var a=document.createElement('span');a.textContent=new Date(x.t).toLocaleDateString('fr-FR',{day:'numeric',month:'short'})+' · '+Math.round(x.sec/60)+' min';
+  var b=document.createElement('b');b.textContent=fmt(x.steps)+' pas';
+  d.appendChild(a);d.appendChild(b);h.appendChild(d);
+ });
+}
+var base=9.8,last=0,prev=0,rising=false;
+function onMotion(e){
+ var a=e.accelerationIncludingGravity;if(!a||a.x==null)return;
+ var m=Math.sqrt(a.x*a.x+a.y*a.y+a.z*a.z);
+ base=base*0.98+m*0.02;
+ var v=m-base,now=Date.now();
+ if(v>1.4&&prev<=1.4&&now-last>300){last=now;sessSteps++;data.days[key]=(data.days[key]||0)+1;render()}
+ prev=v;
+}
+function start(){
+ var go=function(){
+  run=true;sessSteps=0;t0=Date.now();
+  window.addEventListener('devicemotion',onMotion);
+  tick=setInterval(render,1000);
+  try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(function(l){lock=l}).catch(function(){})}catch(e){}
+  $('go').textContent='Arrêter';$('go').className='stop';
+  $('msg').textContent='Marche en cours. Garde le téléphone sur toi.';
+ };
+ if(typeof DeviceMotionEvent==='undefined'){$('msg').textContent='Capteur de mouvement indisponible sur cet appareil.';return}
+ if(typeof DeviceMotionEvent.requestPermission==='function'){DeviceMotionEvent.requestPermission().then(function(r){if(r==='granted')go();else $('msg').textContent='Autorise le capteur de mouvement pour compter les pas.'}).catch(function(){})}
+ else go();
+}
+function stop(){
+ run=false;clearInterval(tick);window.removeEventListener('devicemotion',onMotion);
+ try{if(lock)lock.release()}catch(e){}
+ var sec=Math.floor((Date.now()-t0)/1000);
+ if(sessSteps>0){data.sessions.push({t:Date.now(),steps:sessSteps,sec:sec})}
+ save();hist();render();
+ $('go').textContent='Démarrer une marche';$('go').className='';
+ $('msg').textContent=sessSteps>0?'Marche enregistrée : '+fmt(sessSteps)+' pas.':'Aucun pas détecté.';
+}
+$('go').addEventListener('click',function(){run?stop():start()});
+setInterval(function(){if(run)save()},5000);
+render();hist();
+})();
+</script>
+</body>
+</html>

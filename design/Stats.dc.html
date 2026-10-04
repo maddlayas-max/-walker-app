@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Stats</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>body{margin:0}.t{flex:1;text-align:center;padding:11px 0;font-size:14px;font-weight:600;color:#3A3446}.r{display:flex;justify-content:space-between;align-items:center;background:#201D29;border-radius:18px;padding:12px 16px}.r b{font-size:17px}.r span{font-size:13px;color:#B9B3C9}</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:linear-gradient(160deg,#FBD9C4 0%,#E9D3EC 55%,#C9CCF5 100%);font-family:'Manrope',sans-serif;color:#1B1822;display:flex;flex-direction:column">
+<div style="padding:28px 22px 14px;font-weight:800;font-size:28px">Stats</div>
+<div style="margin:0 22px;border:1.5px solid #1B1822;border-radius:26px;padding:3px;display:flex"><span class="t" style="background:#16141C;color:#fff;border-radius:22px;font-weight:800">Semaine</span><span class="t">Mois</span><span class="t">Année</span></div>
+<div style="position:relative;height:190px;margin:12px 22px 0">
+<svg width="346" height="190" viewBox="0 0 346 190"><path d="M0 120 C30 110 40 70 65 72 C95 75 100 130 125 125 C155 118 160 50 190 48 C220 46 225 105 250 100 C280 95 285 40 310 30 C325 26 335 40 346 44" fill="none" stroke="#16141C" stroke-width="2.5"/><line x1="310" y1="30" x2="310" y2="170" stroke="#E8795A" stroke-width="2"/><circle cx="310" cy="30" r="6" fill="#16141C"/></svg>
+<div style="position:absolute;left:276px;top:-14px;background:#16141C;color:#fff;border-radius:10px;padding:4px 10px;font-size:12px;font-weight:800">8 432</div>
+<div style="position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;font-size:11px;color:#5E5870;font-weight:600"><span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span></div>
+</div>
+<div style="flex:1;margin-top:16px;background:#16141C;border-radius:36px 36px 0 0;color:#F4F1FA;padding:22px 22px 0;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;margin-bottom:6px"><div><div style="font-size:12px;color:#B9B3C9">Pas</div><div style="font-weight:800;font-size:26px">52 310</div></div><div><div style="font-size:12px;color:#B9B3C9">Distance</div><div style="font-weight:800;font-size:26px">38,4 km</div></div><div><div style="font-size:12px;color:#B9B3C9">Énergie</div><div style="font-weight:800;font-size:26px">2 890</div></div></div>
+<div style="font-size:12px;color:#B9B3C9">Records</div>
+<div class="r"><span>Plus longue marche</span><b>7,8 km</b></div>
+<div class="r"><span>Meilleure série</span><b>12 jours</b></div>
+<div class="r"><span>Meilleur jour</span><b>14 906 pas</b></div>
+<div style="margin:auto 0 22px;height:64px;border-radius:32px;background:#2A2733;display:flex;align-items:center;justify-content:space-around;color:#B9B3C9;font-size:13px;font-weight:600"><span>Accueil</span><span>Planning</span><span style="background:#fff;color:#16141C;border-radius:22px;padding:11px 18px;font-weight:800">Stats</span><span>Profil</span></div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Planning</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>body{margin:0}.d{display:flex;align-items:center;justify-content:center;height:34px;font-size:14px;font-weight:600;color:#E9E5F2}.o{background:#F2B79A;color:#16141C;border-radius:17px;font-weight:800}.h{color:#8F89A3;font-size:11px;font-weight:600;height:24px}</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#F4F2F8;font-family:'Manrope',sans-serif;color:#1B1822;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:28px 22px 16px"><span style="font-weight:800;font-size:28px">Planning</span><button style="height:44px;border:1px solid #D6D1E3;border-radius:22px;background:#fff;padding:0 16px;font:700 13px 'Manrope',sans-serif;color:#1B1822">+ Nouvelle marche</button></div>
+<div style="margin:0 22px 16px;background:#E8E4F0;border-radius:24px;padding:4px;display:flex"><span style="flex:1;text-align:center;padding:11px 0;font-size:14px;font-weight:600;color:#5E5870">Objectifs</span><span style="flex:1;text-align:center;padding:11px 0;font-size:14px;font-weight:800;background:#fff;border-radius:20px">Séances</span></div>
+<div style="margin:0 22px;background:#16141C;border-radius:28px;padding:18px 16px;position:relative;overflow:hidden">
+<div style="position:absolute;left:-60px;top:80px;width:120px;height:180px;border-radius:50%;background:#6B5CE0;filter:blur(50px);opacity:.55"></div>
+<div style="position:relative;display:flex;justify-content:space-between;color:#fff;font-weight:800;font-size:16px;margin-bottom:8px"><span>‹</span><span>Octobre 2026</span><span>›</span></div>
+<div style="position:relative;display:grid;grid-template-columns:repeat(7,1fr);text-align:center">
+<span class="d h">LUN</span><span class="d h">MAR</span><span class="d h">MER</span><span class="d h">JEU</span><span class="d h">VEN</span><span class="d h">SAM</span><span class="d h">DIM</span>
+<span class="d"></span><span class="d"></span><span class="d"></span><span class="d">1</span><span class="d">2</span><span class="d">3</span><span class="d o">4</span>
+<span class="d">5</span><span class="d">6</span><span class="d">7</span><span class="d">8</span><span class="d">9</span><span class="d">10</span><span class="d">11</span>
+<span class="d">12</span><span class="d">13</span><span class="d">14</span><span class="d">15</span><span class="d">16</span><span class="d">17</span><span class="d">18</span>
+<span class="d">19</span><span class="d">20</span><span class="d">21</span><span class="d">22</span><span class="d">23</span><span class="d">24</span><span class="d">25</span>
+<span class="d">26</span><span class="d">27</span><span class="d">28</span><span class="d">29</span><span class="d">30</span><span class="d">31</span><span class="d"></span>
+</div>
+</div>
+<div style="padding:20px 22px 0;flex:1">
+<div style="font-size:13px;color:#5E5870;margin-bottom:10px">Prochaines séances</div>
+<div style="background:#fff;border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div><div style="font-weight:800;font-size:16px">Marche matinale</div><div style="font-size:12px;color:#5E5870">Chaque jour · 7 h 30</div></div><span style="font-weight:800;font-size:15px">3 km</span></div>
+<div style="background:#fff;border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-weight:800;font-size:16px">Marche du soir</div><div style="font-size:12px;color:#5E5870">Lun · Mer · Ven · 19 h 00</div></div><span style="font-weight:800;font-size:15px">5 km</span></div>
+</div>
+<div style="margin:0 22px 22px;height:64px;border-radius:32px;background:#16141C;display:flex;align-items:center;justify-content:space-around;color:#B9B3C9;font-size:13px;font-weight:600">
+<span>Accueil</span><span style="background:#fff;color:#16141C;border-radius:22px;padding:11px 18px;font-weight:800">Planning</span><span>Stats</span><span>Profil</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

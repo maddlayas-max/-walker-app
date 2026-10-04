@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Marche en direct</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>body{margin:0}.l{font-size:12px;color:#9A97A6;margin-bottom:2px}.v{font-size:24px;font-weight:800}.v small{font-size:13px;margin-left:2px}</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#000;font-family:'Manrope',sans-serif;color:#fff">
+<div style="position:absolute;top:0;left:0;right:0;height:440px;background:#37425A;border-radius:0 0 36px 36px;overflow:hidden">
+<svg width="390" height="440" viewBox="0 0 390 440"><g stroke="#4A5670" stroke-width="2" fill="none"><path d="M0 120L150 60L390 20"/><path d="M60 440L110 220L260 170L340 440"/><path d="M0 330L390 270"/><path d="M200 0L225 440"/><path d="M300 100L390 190"/></g><path d="M0 200L390 100" stroke="#4F5B75" stroke-width="16" fill="none"/>
+<path d="M90 380L120 320L200 290L170 230L220 190L290 160" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="90" cy="380" r="8" fill="#fff"/><circle cx="290" cy="160" r="22" fill="#E8795A" fill-opacity="0.3"/><circle cx="290" cy="160" r="10" fill="#E8795A" stroke="#fff" stroke-width="3"/></svg>
+<div style="position:absolute;top:28px;left:22px;background:rgba(22,20,28,.85);border-radius:18px;padding:8px 14px;font-size:13px;font-weight:800">● En cours · GPS actif</div>
+<div style="position:absolute;top:28px;right:22px;background:rgba(22,20,28,.85);border-radius:18px;padding:8px 12px;font-size:13px;font-weight:700">24° · 48%</div>
+</div>
+<div style="position:absolute;top:462px;left:0;right:0;text-align:center"><div style="font-size:13px;color:#9A97A6;margin-bottom:2px">Durée</div><div style="font-size:64px;font-weight:800;letter-spacing:-2px">00:38:20</div></div>
+<div style="position:absolute;top:600px;left:22px;right:22px;display:flex;justify-content:space-between"><div><div class="l">Distance</div><div class="v">3,42<small>km</small></div></div><div><div class="l">Allure</div><div class="v">11'12''<small>/km</small></div></div><div><div class="l">Énergie</div><div class="v">186<small>kcal</small></div></div></div>
+<div style="position:absolute;bottom:56px;left:22px;right:22px;display:flex;gap:14px;align-items:center">
+<button style="flex:1;height:64px;border:0;border-radius:32px;background:#fff;color:#0F0E13;font:800 17px 'Manrope',sans-serif;box-shadow:0 0 40px rgba(201,167,245,.35)">Pause</button>
+<button aria-label="Arrêter" style="width:64px;height:64px;border:0;border-radius:32px;background:#E8795A;display:flex;align-items:center;justify-content:center"><span style="width:20px;height:20px;border-radius:5px;background:#fff;display:block"></span></button>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
